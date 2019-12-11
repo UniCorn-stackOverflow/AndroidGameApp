@@ -1,5 +1,6 @@
 package com.example.androidgameapp;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -12,23 +13,31 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
 {
 
+    private Button btnStarten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        btnStarten = (Button)findViewById(R.id.buttonStartGame);
         //Comment
-
     }
+
+    public void onClickPlay(View view) {
+        Intent lobbyIntent = new Intent(MainActivity.this, lobby.class);
+        startActivity(lobbyIntent);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

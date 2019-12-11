@@ -17,6 +17,7 @@
         android:textSize="40sp" />
 
     <Button
+        android:onClick="onClickPlay"
         android:id="@+id/buttonStartGame"
         android:layout_width="171dp"
         android:layout_height="88dp"
