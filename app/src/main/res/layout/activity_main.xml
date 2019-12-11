@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:screenOrientation="landscape"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/cardview_dark_background">
-
     <TextView
         android:id="@+id/showGameName"
         android:layout_width="match_parent"
@@ -21,6 +22,6 @@
         android:layout_width="171dp"
         android:layout_height="88dp"
         android:layout_marginLeft="135pt"
-        android:layout_marginTop="120pt"
+        android:layout_marginTop="150pt"
         android:text="Start Game" />
 </RelativeLayout>
