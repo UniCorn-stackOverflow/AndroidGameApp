@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".lobby"
-    android:background="@color/cardview_dark_background">
+    android:background="@drawable/landscapePic">
 
     <ImageButton
         android:layout_width="89dp"
@@ -14,5 +14,21 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="224dp"
         tools:layout_editor_absoluteY="153dp" />
+    <ImageButton
+        android:layout_width="89dp"
+        android:layout_height="105dp"
+        android:background="@drawable/characterPicRainer"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="500dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <TextView
+        android:id="@+id/Message"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:text="Choose your Character"
+        android:textAlignment="center"
+        android:textColor="#fc038c"
+        android:textSize="40sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
