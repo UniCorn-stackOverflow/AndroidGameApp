@@ -9,7 +9,6 @@
         android:roundIcon="@drawable/ic_mel"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         <activity android:name=".lobby"></activity>
         <activity
             android:name=".MainActivity"

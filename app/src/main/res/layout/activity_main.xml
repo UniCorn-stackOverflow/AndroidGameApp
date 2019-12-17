@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:screenOrientation="landscape"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/app">
+    android:background="@drawable/app"
+    android:screenOrientation="landscape">
+
     <TextView
         android:id="@+id/showGameName"
         android:layout_width="match_parent"
@@ -14,15 +15,23 @@
         android:background="#c4a347"
         android:text="SuperSurvivors"
         android:textAlignment="center"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:onClick="onClickPlay"
         android:id="@+id/buttonStartGame"
         android:layout_width="171dp"
         android:layout_height="88dp"
-        android:layout_marginLeft="120pt"
-        android:layout_marginTop="145pt"
+        android:layout_marginStart="280dp"
+        android:layout_marginEnd="280dp"
+        android:layout_marginBottom="47dp"
         android:background="#03fcec"
-        android:text="Start Game" />
-</RelativeLayout>
+        android:onClick="onClickPlay"
+        android:text="Start Game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
