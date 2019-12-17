@@ -2,6 +2,8 @@ package com.example.androidgameapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ public class lobby extends AppCompatActivity {
     private Button btnChoose;
     private ImageView imgVStatPrev1;
     private ImageView ImgVStatPrev2;
+    private boolean isPlayer1;
 
 
 
@@ -32,18 +35,24 @@ public class lobby extends AppCompatActivity {
 
     public void onClickP1(View view)
     {
+        isPlayer1 = true;
         imgVStatPrev1.setVisibility(View.VISIBLE);
         ImgVStatPrev2.setVisibility(View.INVISIBLE);
         btnChoose.setEnabled(true);
     }
     public void onClickP2(View view)
     {
+        isPlayer1 = false;
         ImgVStatPrev2.setVisibility(View.VISIBLE);
         imgVStatPrev1.setVisibility(View.INVISIBLE);
         btnChoose.setEnabled(true);
     }
     public void onClickChoose(View view)
     {
+        Intent myIntent;
+        myIntent = new Intent(lobby.this,lvl1.class);
+        startActivity(myIntent);
 
+        ;
     }
 }
