@@ -15,12 +15,15 @@ public class lvl1 extends AppCompatActivity {
 
     Intent prIntent;
     ImageView player;
+    Character enemy1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lvl1);
         prIntent = getIntent();
+        //enemy1.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
+        //enemy1.draw();
 
     }
 

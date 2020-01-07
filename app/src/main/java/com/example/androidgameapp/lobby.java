@@ -53,6 +53,5 @@ public class lobby extends AppCompatActivity {
         myIntent = new Intent(lobby.this,lvl1.class);
         startActivity(myIntent);
 
-        ;
     }
 }
