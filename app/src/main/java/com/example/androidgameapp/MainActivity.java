@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    //diese Zeilke entfrernen
-
         btnStarten = (Button)findViewById(R.id.buttonStartGame);
-        //Comment
     }
 
     public void onClickPlay(View view) {
