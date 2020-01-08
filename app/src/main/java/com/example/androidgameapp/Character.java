@@ -7,6 +7,7 @@ import android.media.Image;
 class Character {
     private double health;
     private Bitmap image;
+    private int damage;
 
     public Character(){}
     public void setHealth(double health)
@@ -16,6 +17,14 @@ class Character {
     public double getHealth()
     {
         return health;
+    }
+    public void setDamage(int damage)
+    {
+        this.damage = damage;
+    }
+    public int getDamage()
+    {
+        return damage;
     }
     public void setImage(Bitmap bmp)
     {

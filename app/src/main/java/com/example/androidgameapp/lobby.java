@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import static java.lang.Thread.sleep;
+
 public class lobby extends AppCompatActivity {
 
     private ImageButton imgBtnP1;
@@ -17,7 +19,7 @@ public class lobby extends AppCompatActivity {
     private Button btnChoose;
     private ImageView imgVStatPrev1;
     private ImageView ImgVStatPrev2;
-    private boolean isPlayer1;
+    private String isCharacter1;
 
 
 
@@ -35,22 +37,24 @@ public class lobby extends AppCompatActivity {
 
     public void onClickP1(View view)
     {
-        isPlayer1 = true;
+        isCharacter1 = "yes";
         imgVStatPrev1.setVisibility(View.VISIBLE);
         ImgVStatPrev2.setVisibility(View.INVISIBLE);
         btnChoose.setEnabled(true);
     }
     public void onClickP2(View view)
     {
-        isPlayer1 = false;
+        isCharacter1 = "no";
         ImgVStatPrev2.setVisibility(View.VISIBLE);
         imgVStatPrev1.setVisibility(View.INVISIBLE);
         btnChoose.setEnabled(true);
+
     }
     public void onClickChoose(View view)
     {
         Intent myIntent;
         myIntent = new Intent(lobby.this,lvl1.class);
+        myIntent.putExtra(lvl1.isCharacter1,isCharacter1);
         startActivity(myIntent);
 
     }
