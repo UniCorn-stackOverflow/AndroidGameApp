@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity
         btnStarten = (Button)findViewById(R.id.buttonStartGame);
     }
 
-    public void onClickPlay(View view) {
+    public void onClickPlay(View view)
+    {
         Intent lobbyIntent = new Intent(MainActivity.this, lobby.class);
         startActivity(lobbyIntent);
     }
