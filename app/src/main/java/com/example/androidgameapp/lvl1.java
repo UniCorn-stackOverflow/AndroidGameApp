@@ -14,7 +14,7 @@ import java.io.File;
 
 public class lvl1 extends AppCompatActivity {
 
-    ImageView player;
+    PlayableChar playableChar;
     Character enemy1;
     public final static String isCharacter1 = "yes";
     public String isPlayer1;
@@ -38,6 +38,13 @@ public class lvl1 extends AppCompatActivity {
 
         if(isPlayer1.equals("yes"))
         {
+            //champ.png
+            //300 190 1.2
+            playableChar = new PlayableChar();
+            playableChar.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.champ));
+            playableChar.setHealth(300);
+            playableChar.setDamage(190);
+            playableChar.setAttackspeed(1.2);
             msg.setMessage(isPlayer1);
             msg.setCancelable(true);
             AlertDialog msgDialog = msg.create();
@@ -45,6 +52,15 @@ public class lvl1 extends AppCompatActivity {
         }
         else
         {
+            //blankplayer.png
+            //500 90 0.5
+            playableChar = new PlayableChar();
+            playableChar.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.blankplayer));
+            playableChar.setHealth(500);
+            playableChar.setDamage(90);
+            playableChar.setAttackspeed(0.5);
+
+
             msg.setMessage("no");
             msg.setCancelable(true);
             AlertDialog msgDialog = msg.create();
