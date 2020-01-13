@@ -10,7 +10,7 @@ abstract class Character  {
     private Bitmap image;
     private int damage;
     private int x;
-    private int y = (Resources.getSystem().getDisplayMetrics().heightPixels) / 2;
+    private int y = (Resources.getSystem().getDisplayMetrics().heightPixels)-320;
     //private int yVelocity;
     private int xVelocity = 10;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -37,6 +37,7 @@ abstract class Character  {
     }
     public void setX(int x){ this.x = x;}
     public int getX(){return x;}
+    public int getY(){return y;}
     public void setxVelocity(int xVelocity){ this.xVelocity = xVelocity;}
     public void setImage(Bitmap bmp)
     {
@@ -48,7 +49,6 @@ abstract class Character  {
     }
     protected void update(){
         x += xVelocity;
-        //y += yVelocity;
         if ((x > screenWidth - image.getWidth()) || (x < 0)) {
             xVelocity = xVelocity*-1;
         }
@@ -59,17 +59,12 @@ abstract class Character  {
         if(x <= xP)
         {
             x += xVelocity;
-            //y += yVelocity;
             if ((x > screenWidth - image.getWidth()) || (x < 0)) {
                 xVelocity = xVelocity*-1;
             }
         }else
         {
             x -= xVelocity;
-            //y += yVelocity;
-            if ((x > screenWidth + image.getWidth()) || (x > 0)) {
-                xVelocity = xVelocity*+1;
-            }
         }
 
     }

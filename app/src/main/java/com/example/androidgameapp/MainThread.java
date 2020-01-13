@@ -3,14 +3,14 @@ package com.example.androidgameapp;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class EnemyThread extends Thread {
+public class MainThread extends Thread {
 
     private SurfaceHolder surfaceHolder;
     private Lvl1View lvl1View;
     private boolean running;
     public static Canvas canvas;
 
-    public EnemyThread(SurfaceHolder surfaceHolder, Lvl1View lvl1View)
+    public MainThread(SurfaceHolder surfaceHolder, Lvl1View lvl1View)
     {
         super();
         this.surfaceHolder = surfaceHolder;

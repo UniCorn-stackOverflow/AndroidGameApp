@@ -19,7 +19,6 @@ import java.io.File;
 public class lvl1 extends Activity {
 
     PlayableChar playableChar;
-    //Character enemy1;
     public final static String isCharacter1 = "yes";
     public String isPlayer1;
 
@@ -37,9 +36,7 @@ public class lvl1 extends Activity {
     protected void loadPlayer()
     {
         isPlayer1 = getIntent().getExtras().getString(isCharacter1);
-        //Test
-        //AlertDialog.Builder msg = new AlertDialog.Builder(this);
-        //msg.setTitle("Is Character 1?");
+
 
         if(isPlayer1.equals("yes"))
         {
@@ -50,10 +47,6 @@ public class lvl1 extends Activity {
             playableChar.setHealth(300);
             playableChar.setDamage(190);
             playableChar.setAttackspeed(1.2);
-            //msg.setMessage(isPlayer1);
-            //msg.setCancelable(true);
-            //AlertDialog msgDialog = msg.create();
-           // msgDialog.show();
         }
         else
         {
@@ -65,11 +58,6 @@ public class lvl1 extends Activity {
             playableChar.setDamage(90);
             playableChar.setAttackspeed(0.5);
 
-
-            //msg.setMessage("no");
-            //msg.setCancelable(true);
-            //AlertDialog msgDialog = msg.create();
-           // msgDialog.show();
         }
     }
 
