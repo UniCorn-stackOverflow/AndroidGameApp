@@ -29,7 +29,7 @@ public class lvl1 extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         loadPlayer();
         playableChar.setX(Resources.getSystem().getDisplayMetrics().widthPixels/2);
-        playableChar.setxVelocity(20);
+        playableChar.setxVelocity(10);
         setContentView(new Lvl1View(this,playableChar));
     }
 

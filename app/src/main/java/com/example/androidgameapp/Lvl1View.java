@@ -17,6 +17,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
     private PlayableChar player;
     private Bitmap map1;
     private Bitmap resizedMap;
+    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
 
     public Lvl1View(Context context, PlayableChar player){
@@ -72,12 +73,14 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
     public void update(){
-       enemy.update(player.getX());
+       //enemy.update(player.getX());
         /*for(int i = 0; i <5 ;i++)
         {
             enemies[i].update(player.getX());
         }*/
-        player.update();
+        //player.update();
+        updateEnemy(player.getX(),enemy);
+        updatePlayer(player, enemy.getX());
     }
 
     @Override
@@ -94,6 +97,46 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         }*/
 
         player.draw(canvas);
+
+    }
+
+     protected void updatePlayer(PlayableChar player, int xE){
+
+        int xVelocity = player.getxVelocity();
+        if((player.getX() + player.getxVelocity()) == xE)
+        {
+            player.setX(player.getX());
+        }
+        else{
+            player.addX(player.getxVelocity());
+        }
+
+        if ((player.getX() > screenWidth - player.getImage().getWidth() || (player.getX()) < 0)) {
+            xVelocity = xVelocity*-1;
+            player.setxVelocity(xVelocity);
+        }
+    }
+    public void updateEnemy(int xP, EnemyCharacter enemy){
+
+        int xVelocity = enemy.getxVelocity();
+        if((enemy.getX() + enemy.getxVelocity()) == xP)
+        {
+            enemy.setX(enemy.getX());
+        }
+        else {
+            enemy.addX(enemy.getxVelocity());
+        }
+            if(enemy.getX() <= xP)
+        {
+            enemy.addX(enemy.getxVelocity());
+            if ((enemy.getX() > screenWidth - enemy.getImage().getWidth()) || (enemy.getX() < 0)) {
+                xVelocity = xVelocity*-1;
+                enemy.setxVelocity(xVelocity);
+            }
+        }else
+        {
+            enemy.addX((xVelocity)*-1);
+        }
 
     }
 
