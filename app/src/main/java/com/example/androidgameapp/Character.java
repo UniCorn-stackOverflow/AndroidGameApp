@@ -5,19 +5,19 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.media.Image;
 
-class Character {
+abstract class Character  {
     private double health;
     private Bitmap image;
     private int damage;
     private int x;
     private int y = (Resources.getSystem().getDisplayMetrics().heightPixels) / 2;
     //private int yVelocity;
-    private int xVelocity = 1;
+    private int xVelocity = 10;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     //private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     public Character(){
-        x = (int)(Math.random()*((screenWidth - 0)))+0;
+
     }
     public void setHealth(double health)
     {
@@ -36,6 +36,7 @@ class Character {
         return damage;
     }
     public void setX(int x){ this.x = x;}
+    public int getX(){return x;}
     public void setxVelocity(int xVelocity){ this.xVelocity = xVelocity;}
     public void setImage(Bitmap bmp)
     {
@@ -45,11 +46,31 @@ class Character {
     {
         canvas.drawBitmap(image,x,y,null);
     }
-    public void update(){
+    protected void update(){
         x += xVelocity;
         //y += yVelocity;
         if ((x > screenWidth - image.getWidth()) || (x < 0)) {
             xVelocity = xVelocity*-1;
         }
+    }
+    public void update(int xP){
+
+
+        if(x <= xP)
+        {
+            x += xVelocity;
+            //y += yVelocity;
+            if ((x > screenWidth - image.getWidth()) || (x < 0)) {
+                xVelocity = xVelocity*-1;
+            }
+        }else
+        {
+            x -= xVelocity;
+            //y += yVelocity;
+            if ((x > screenWidth + image.getWidth()) || (x > 0)) {
+                xVelocity = xVelocity*+1;
+            }
+        }
+
     }
 }

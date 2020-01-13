@@ -10,7 +10,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
 
     private EnemyThread enemyThread;
     private PlayerThread playerThread;
-    private Character enemy;
+    private EnemyCharacter enemy;
     private PlayableChar player;
 
     public Lvl1View(Context context, PlayableChar player){
@@ -29,7 +29,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        enemy = new Character();
+        enemy = new EnemyCharacter();
         enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
         enemyThread.setRunning(true);
         enemyThread.start();
@@ -53,7 +53,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
     public void update(){
-        enemy.update();
+        enemy.update(player.getX());
         player.update();
     }
 

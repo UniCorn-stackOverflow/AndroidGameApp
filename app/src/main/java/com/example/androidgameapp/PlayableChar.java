@@ -22,5 +22,4 @@ class PlayableChar extends Character {
 
 
 
-
 }
