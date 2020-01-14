@@ -9,6 +9,8 @@ import android.view.Display;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import androidx.appcompat.app.AlertDialog;
+
 public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread mainThread;
@@ -18,6 +20,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap map1;
     private Bitmap resizedMap;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    boolean collision = false;
 
 
     public Lvl1View(Context context, PlayableChar player){
@@ -79,8 +82,8 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
             enemies[i].update(player.getX());
         }*/
         //player.update();
-        updateEnemy(player.getX(),enemy);
-        updatePlayer(player, enemy.getX());
+        updateEnemy(enemy, player);
+
     }
 
     @Override
@@ -99,44 +102,33 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         player.draw(canvas);
 
     }
-
-     protected void updatePlayer(PlayableChar player, int xE){
-
-        int xVelocity = player.getxVelocity();
-        if((player.getX() + player.getxVelocity()) == xE)
-        {
-            player.setX(player.getX());
-        }
-        else{
-            player.addX(player.getxVelocity());
-        }
-
-        if ((player.getX() > screenWidth - player.getImage().getWidth() || (player.getX()) < 0)) {
-            xVelocity = xVelocity*-1;
-            player.setxVelocity(xVelocity);
-        }
-    }
-    public void updateEnemy(int xP, EnemyCharacter enemy){
+    public void updateEnemy(EnemyCharacter enemy, PlayableChar player) {
 
         int xVelocity = enemy.getxVelocity();
-        if((enemy.getX() + enemy.getxVelocity()) == xP)
+        collision = false;
+        if((enemy.getX() + xVelocity) == player.getX()  || enemy.getX() == player.getX() || enemy.getX() + enemy.getImage().getWidth()/2 == player.getX() || enemy.getX() - enemy.getImage().getWidth()/2 == player.getX() || collision == true)
         {
-            enemy.setX(enemy.getX());
+            enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.setst));
+            enemy.setX(enemy.getX() - enemy.getImage().getWidth());
+            player.setX(player.getX() + enemy.getxVelocity());
+            collision = true;
         }
         else {
-            enemy.addX(enemy.getxVelocity());
-        }
-            if(enemy.getX() <= xP)
-        {
-            enemy.addX(enemy.getxVelocity());
-            if ((enemy.getX() > screenWidth - enemy.getImage().getWidth()) || (enemy.getX() < 0)) {
-                xVelocity = xVelocity*-1;
-                enemy.setxVelocity(xVelocity);
+
+            if(enemy.getX() <= player.getX())
+            {
+                enemy.addX(xVelocity);
+                if ((enemy.getX() > screenWidth - enemy.getImage().getWidth()) || (enemy.getX() < 0)) {
+                    xVelocity = xVelocity*-1;
+                    enemy.setxVelocity(xVelocity);
+                }
+            }else
+            {
+                enemy.addX((xVelocity)*-1);
             }
-        }else
-        {
-            enemy.addX((xVelocity)*-1);
+
         }
+
 
     }
 
