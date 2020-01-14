@@ -1,6 +1,7 @@
 package com.example.androidgameapp;
 
 import android.graphics.Canvas;
+import android.graphics.drawable.VectorDrawable;
 import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
@@ -8,6 +9,7 @@ public class MainThread extends Thread {
     private SurfaceHolder surfaceHolder;
     private Lvl1View lvl1View;
     private boolean running;
+    private boolean collision;
     public static Canvas canvas;
 
     public MainThread(SurfaceHolder surfaceHolder, Lvl1View lvl1View)
@@ -17,7 +19,7 @@ public class MainThread extends Thread {
         this.lvl1View = lvl1View;
 
     }
-
+    public void setRunning(Boolean running){this.running = running;};
     @Override
     public void run() {
         while (running)
@@ -28,6 +30,7 @@ public class MainThread extends Thread {
                 synchronized (surfaceHolder) {
                     this.lvl1View.update();
                     this.lvl1View.draw(canvas);
+                    lvl1View.collisionDetection();
                 }
             } catch (Exception e) {}
             finally{
@@ -40,8 +43,9 @@ public class MainThread extends Thread {
                 }
 
             }
+
         }
     }
-    public void setRunning(boolean isRunning) { running = isRunning;}
+
 
 }
