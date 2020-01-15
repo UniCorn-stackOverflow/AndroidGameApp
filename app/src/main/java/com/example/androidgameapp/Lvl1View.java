@@ -37,7 +37,6 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         super(context);
         this.player = player;
         getHolder().addCallback(this);
-
         mainThread = new MainThread(getHolder(), this);
         setFocusable(true);
     }
@@ -46,30 +45,16 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
         map1 = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
         resizedMap = Bitmap.createScaledBitmap(map1,(Resources.getSystem().getDisplayMetrics().widthPixels),(Resources.getSystem().getDisplayMetrics().heightPixels),true);
-        //createEnemies();
         enemy = new EnemyCharacter();
         enemy.setDamage(20);
         enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
-
         mainThread.setRunning(true);
         mainThread.start();
-    }
-    public void createEnemies()
-    {
-        enemies = new EnemyCharacter[5];
-        for(int i = 0; i<5 ; i++)
-        {
-            enemy = new EnemyCharacter();
-            enemy.setDamage(20);
-            enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
-            enemies[i] =  enemy;
-        }
     }
     @Override
     public void surfaceDestroyed(SurfaceHolder holder)
@@ -88,17 +73,13 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
     public void update(){
-       //enemy.update(player.getX());
-        /*for(int i = 0; i <5 ;i++)
-        {
-            enemies[i].update(player.getX());
-        }*/
-        //player.update();
         if(player.getHealth() != 0) {
             updateEnemy(enemy, player);
+            updatePlayer(player,enemy);
         }else
         {
-           // System.exit(0);
+
+            System.exit(0);
         }
     }
 
@@ -110,16 +91,14 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawBitmap(resizedMap,0,0,null);
         }
         enemy.draw(canvas);
-        /*for(int i = 0; i <5 ;i++)
-        {
-            enemies[i].draw(canvas);
-        }*/
 
         player.draw(canvas);
 
     }
 
-     protected void updatePlayer(PlayableChar player,int xE){
+
+     protected void updatePlayer(PlayableChar player,EnemyCharacter enemy){
+        int xE = enemy.getX();
 
         int xVelocity = player.getxVelocity();
         if((player.getX() + player.getxVelocity()) == xE)
