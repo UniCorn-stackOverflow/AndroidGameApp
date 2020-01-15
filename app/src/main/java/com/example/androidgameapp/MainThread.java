@@ -18,7 +18,7 @@ public class MainThread extends Thread {
         super();
         this.surfaceHolder = surfaceHolder;
         this.lvl1View = lvl1View;
-//        sensor = new SensorActivity();
+
 
     }
     public void setRunning(Boolean running){this.running = running;};
@@ -45,7 +45,7 @@ public class MainThread extends Thread {
                 }
 
             }
-            //sensor.onResume();
+
         }
     }
 

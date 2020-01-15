@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.Toast;
 
 public class SensorActivity extends Activity implements SensorEventListener {
 
@@ -13,17 +14,19 @@ public class SensorActivity extends Activity implements SensorEventListener {
     }
 
     private SensorManager sensor;
-    private Sensor accelerometer;
+    private Sensor motion;
     private PlayableChar player;
     public SensorActivity(){
         sensor = (SensorManager)getSystemService(SENSOR_SERVICE);
-        accelerometer = sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        motion = sensor.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
         player = new PlayableChar();
     }
 
     protected void onResume(){
         super.onResume();
-        sensor.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+        sensor.registerListener(this,motion,SensorManager.SENSOR_DELAY_NORMAL);
+
     }
     protected void onPause(){
         super.onPause();
@@ -32,6 +35,8 @@ public class SensorActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         player.move(event,getSensor());
+        float text = event.values[1];
+        Toast.makeText(getApplicationContext(),(int)text,Toast.LENGTH_LONG);
     }
 
     @Override

@@ -21,7 +21,17 @@ class PlayableChar extends Character {
 
     }
     public void move(SensorEvent event, SensorManager sensor){
+        if(event.values[1] < 2){
+            if(getX() > 0){
+                setxVelocity(getxVelocity() * -1);
+            }
 
+        }
+        if(event.values[1] > 2){
+            if(getX() < 0){
+                setxVelocity(getxVelocity() + -1);
+            }
+        }
     }
 
 
