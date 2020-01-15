@@ -47,30 +47,14 @@ abstract class Character  {
     {
         canvas.drawBitmap(image,x,y,null);
     }
-    /*
-    protected void update(){
-        x += xVelocity;
-        if ((x > screenWidth - image.getWidth()) || (x < 0)) {
-            xVelocity = xVelocity*-1;
-        }
-    }
-    public void update(int xP){
 
-
-        if(x <= xP)
-        {
-            x += xVelocity;
-            if ((x > screenWidth - image.getWidth()) || (x < 0)) {
-                xVelocity = xVelocity*-1;
-            }
-        }else
-        {
-            x -= xVelocity;
-        }*/
 
     public void addX(int xVelocity)
     {
         x += xVelocity;
     }
-
+    public void recieveDamage(int damage)
+    {
+        health -= damage;
+    }
 }

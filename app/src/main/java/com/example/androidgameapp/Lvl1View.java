@@ -54,6 +54,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         resizedMap = Bitmap.createScaledBitmap(map1,(Resources.getSystem().getDisplayMetrics().widthPixels),(Resources.getSystem().getDisplayMetrics().heightPixels),true);
         //createEnemies();
         enemy = new EnemyCharacter();
+        enemy.setDamage(20);
         enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
 
         mainThread.setRunning(true);
@@ -65,6 +66,7 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         for(int i = 0; i<5 ; i++)
         {
             enemy = new EnemyCharacter();
+            enemy.setDamage(20);
             enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
             enemies[i] =  enemy;
         }
@@ -92,16 +94,12 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
             enemies[i].update(player.getX());
         }*/
         //player.update();
-        //updateEnemy(enemy,player);
-
-       //enemy.update(player.getX());
-        /*for(int i = 0; i <5 ;i++)
+        if(player.getHealth() != 0) {
+            updateEnemy(enemy, player);
+        }else
         {
-            enemies[i].update(player.getX());
-        }*/
-        //player.update();
-        //updateEnemy(player.getX(),enemy);
-        //updatePlayer(player, enemy.getX());
+           // System.exit(0);
+        }
     }
 
     @Override
@@ -137,21 +135,20 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
             player.setxVelocity(xVelocity);
         }
     }
-    public void updateEnemy(int xP , EnemyCharacter enemy){
+    public void updateEnemy(EnemyCharacter enemy, PlayableChar player ){
 
         int xVelocity = enemy.getxVelocity();
         collision = false;
         if((enemy.getX() + xVelocity) == player.getX()  || enemy.getX() == player.getX() || enemy.getX() + enemy.getImage().getWidth()/2 == player.getX() || enemy.getX() - enemy.getImage().getWidth()/2 == player.getX() || collision == true)
-       // int xVelocity = enemy.getxVelocity();
-        if((enemy.getX() + enemy.getxVelocity()) == xP)
         {
             enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.setst));
-            enemy.setX(enemy.getX() - enemy.getImage().getWidth());
-            player.setX(player.getX() + enemy.getxVelocity());
+            player.recieveDamage(enemy.getDamage());
+            enemy.addX(enemy.getxVelocity()*-1);
+            player.addX(enemy.getxVelocity());
             collision = true;
         }
         else {
-
+            enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
             if(enemy.getX() <= player.getX())
             {
                 enemy.addX(xVelocity);
@@ -164,24 +161,8 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
                 enemy.addX((xVelocity)*-1);
             }
 
-            enemy.setX(enemy.getX());
         }
 
-
-        else {
-            enemy.addX(enemy.getxVelocity());
-        }
-            if(enemy.getX() <= xP)
-        {
-            enemy.addX(enemy.getxVelocity());
-            if ((enemy.getX() > screenWidth - enemy.getImage().getWidth()) || (enemy.getX() < 0)) {
-                xVelocity = xVelocity*-1;
-                enemy.setxVelocity(xVelocity);
-            }
-        }else
-        {
-            enemy.addX((xVelocity)*-1);
-        }
 
     }
 
