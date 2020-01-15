@@ -51,7 +51,9 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         map1 = BitmapFactory.decodeResource(getResources(),R.drawable.map1);
         resizedMap = Bitmap.createScaledBitmap(map1,(Resources.getSystem().getDisplayMetrics().widthPixels),(Resources.getSystem().getDisplayMetrics().heightPixels),true);
         enemy = new EnemyCharacter();
+        enemy.setX((int) (Math.random() * screenWidth + 1));
         enemy.setDamage(20);
+        enemy.setY((Resources.getSystem().getDisplayMetrics().heightPixels)-320);
         enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
         mainThread.setRunning(true);
         mainThread.start();
@@ -73,14 +75,17 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
     public void update(){
-        if(player.getHealth() != 0) {
-            updateEnemy(enemy, player);
-            updatePlayer(player,enemy);
-        }else
-        {
 
+        if(player.getHealth() <= 0)
+        {
             System.exit(0);
         }
+        else
+        {
+            updateEnemy(enemy, player);
+            //updatePlayer(player, enemy);
+        }
+
     }
 
     @Override
@@ -114,8 +119,8 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
             player.setxVelocity(xVelocity);
         }
     }
-    public void updateEnemy(EnemyCharacter enemy, PlayableChar player ){
-
+    /*public void updateEnemy(EnemyCharacter enemy, PlayableChar player ){
+        richtige update enemy
         int xVelocity = enemy.getxVelocity();
         collision = false;
         if((enemy.getX() + xVelocity) == player.getX()  || enemy.getX() == player.getX() || enemy.getX() + enemy.getImage().getWidth()/2 == player.getX() || enemy.getX() - enemy.getImage().getWidth()/2 == player.getX() || collision == true)
@@ -137,12 +142,43 @@ public class Lvl1View extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }else
             {
-                enemy.addX((xVelocity)*-1);
+                enemy.addX(xVelocity*-1);
             }
 
         }
+    }*/
+    public void updateEnemy(EnemyCharacter enemy, PlayableChar player ){
 
+        int xVelocity = enemy.getxVelocity();
+        collision = false;
+       if((enemy.getX() + enemy.getxVelocity()) == player.getX()  || enemy.getX() == player.getX() || enemy.getX() + enemy.getImage().getWidth()/2 == player.getX() || enemy.getX() - enemy.getImage().getWidth() == player.getX() || collision == true )
+        //if((enemy.getX() + enemy.getxVelocity() == player.getX()))nope
+        //if(enemy.getX() == player.getX()) nope
+        //if(enemy.getX() + enemy.getImage().getWidth()/2 == player.getX())
+        //if(enemy.getX() + enemy.getImage().getWidth()/2 == player.getX() + player.getImage().getWidth()/2) nope
+        //if(enemy.getX() + enemy.getxVelocity() == player.getX() + player.getImage().getWidth()/2)nope
+        {
+            enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.setst));
+            player.recieveDamage(enemy.getDamage());
+            enemy.addX(enemy.getxVelocity()*-1);
+            player.addX(enemy.getxVelocity());
+            collision = true;
+        }
+        else {
+            enemy.setImage(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
+            if(enemy.getX() <= player.getX())
+            {
+                enemy.addX(enemy.getxVelocity());
+                if ((enemy.getX() > screenWidth - enemy.getImage().getWidth()) || (enemy.getX() < 0)) {
+                    enemy.setxVelocity(enemy.getxVelocity()*-1);
+                    enemy.setxVelocity(enemy.getxVelocity());
+                }
+            }else
+            {
+                enemy.addX(enemy.getxVelocity()*-1);
+            }
 
+        }
     }
 
 
