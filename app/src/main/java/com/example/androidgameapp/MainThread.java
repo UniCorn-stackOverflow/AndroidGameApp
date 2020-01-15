@@ -11,12 +11,14 @@ public class MainThread extends Thread {
     private boolean running;
     private boolean collision;
     public static Canvas canvas;
+    private SensorActivity sensor;
 
     public MainThread(SurfaceHolder surfaceHolder, Lvl1View lvl1View)
     {
         super();
         this.surfaceHolder = surfaceHolder;
         this.lvl1View = lvl1View;
+        sensor = new SensorActivity();
 
     }
     public void setRunning(Boolean running){this.running = running;};
@@ -30,7 +32,7 @@ public class MainThread extends Thread {
                 synchronized (surfaceHolder) {
                     this.lvl1View.update();
                     this.lvl1View.draw(canvas);
-                    lvl1View.collisionDetection();
+
                 }
             } catch (Exception e) {}
             finally{
@@ -43,7 +45,7 @@ public class MainThread extends Thread {
                 }
 
             }
-
+            sensor.onResume();
         }
     }
 

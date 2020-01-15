@@ -1,5 +1,8 @@
 package com.example.androidgameapp;
 
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
+
 class PlayableChar extends Character {
 
     private double attackspeed;
@@ -17,7 +20,9 @@ class PlayableChar extends Character {
     {
 
     }
+    public void move(SensorEvent event, SensorManager sensor){
 
+    }
 
 
 

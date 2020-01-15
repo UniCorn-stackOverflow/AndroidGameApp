@@ -72,4 +72,5 @@ abstract class Character  {
     {
         x += xVelocity;
     }
+
 }
