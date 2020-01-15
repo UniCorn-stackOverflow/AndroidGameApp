@@ -1,6 +1,7 @@
 package com.example.androidgameapp;
 
 import android.graphics.Canvas;
+import android.graphics.drawable.VectorDrawable;
 import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
@@ -8,16 +9,19 @@ public class MainThread extends Thread {
     private SurfaceHolder surfaceHolder;
     private Lvl1View lvl1View;
     private boolean running;
+    private boolean collision;
     public static Canvas canvas;
+    private SensorActivity sensor;
 
     public MainThread(SurfaceHolder surfaceHolder, Lvl1View lvl1View)
     {
         super();
         this.surfaceHolder = surfaceHolder;
         this.lvl1View = lvl1View;
+        sensor = new SensorActivity();
 
     }
-
+    public void setRunning(Boolean running){this.running = running;};
     @Override
     public void run() {
         while (running)
@@ -28,6 +32,7 @@ public class MainThread extends Thread {
                 synchronized (surfaceHolder) {
                     this.lvl1View.update();
                     this.lvl1View.draw(canvas);
+
                 }
             } catch (Exception e) {}
             finally{
@@ -40,8 +45,9 @@ public class MainThread extends Thread {
                 }
 
             }
+            sensor.onResume();
         }
     }
-    public void setRunning(boolean isRunning) { running = isRunning;}
+
 
 }
